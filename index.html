@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revista Digital</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header class="header">
+        <div class="container">
+            <h1 class="titulo">Conexión<span>mx</span></h1>
+            <p class="subtitulo">ACERCANDO TUS FRONTERAS</p>
+        </div>
+    </header>
+
+    <!-- Visor de PDF -->
+    <section class="visor-pdf">
+        <div class="container">
+            <h2 class="seccion-titulo">Visor de Revista</h2>
+            <canvas id="pdf-render"></canvas>
+            <div class="pdf-controls">
+                <button id="prev-page" class="boton">Anterior</button>
+                <span id="page-num">Página 1</span> de <span id="page-count">1</span>
+                <button id="next-page" class="boton">Siguiente</button>
+            </div>
+            <a href="pdfs/JENNIFER-DENIS-ENERO-25.pdf" download class="boton boton-descargar">Descargar PDF</a>
+        </div>
+    </section>
+
+    <!-- Patrocinadores -->
+    <section class="patrocinadores">
+        <div class="container">
+            <h2 class="seccion-titulo">Nuestros Patrocinadores</h2>
+            <div class="carrusel">
+                <img id="patrocinador-img" src="images/patrocinador1.png" alt="Patrocinador">
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Revista Conexión. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/pdf-viewer.js"></script>
+    <script src="js/patrocinadores.js"></script>
+</body>
+</html>
