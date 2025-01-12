@@ -1,12 +1,12 @@
 const patrocinadores = [
-    { src: "images/patrocinador1.png", link: "https://www.facebook.com/profile.php?id=100013567775325" },
-    { src: "images/patrocinador2.png", link: "https://www.youtube.com/watch?v=UDB1Yfsxui4" },
-    { src: "images/patrocinador3.png", link: "https://www.youtube.com/watch?v=UxbQO-21Szg" },
-    { src: "images/patrocinador4.png", link: "https://www.youtube.com/watch?v=qQOa2PPaf9A" },
-    { src: "images/patrocinador5.png", link: "https://www.youtube.com/watch?v=QX268MIAsGw" },
-    { src: "images/patrocinador6.png", link: "https://www.facebook.com/profile.php?id=100083074103372" },
-    { src: "images/patrocinador7.png", link: "https://www.facebook.com/profile.php?id=100078469028505" },
-    { src: "images/patrocinador8.png", link: "https://www.facebook.com/TICKY68" },
+    { src: "Galeria/patrocinador1.png", link: "https://www.facebook.com/profile.php?id=100013567775325" },
+    { src: "Galeria/patrocinador2.png", link: "https://www.youtube.com/watch?v=UDB1Yfsxui4" },
+    { src: "Galeria/patrocinador3.png", link: "https://www.youtube.com/watch?v=UxbQO-21Szg" },
+    { src: "Galeria/patrocinador4.png", link: "https://www.youtube.com/watch?v=qQOa2PPaf9A" },
+    { src: "Galeria/patrocinador5.png", link: "https://www.youtube.com/watch?v=QX268MIAsGw" },
+    { src: "Galeria/patrocinador6.png", link: "https://www.facebook.com/profile.php?id=100083074103372" },
+    { src: "Galeria/patrocinador7.png", link: "https://www.facebook.com/profile.php?id=100078469028505" },
+    { src: "Galeria/patrocinador8.png", link: "https://www.facebook.com/TICKY68" },
   ];
   
   let currentIndex = 0;

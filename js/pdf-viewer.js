@@ -5,7 +5,7 @@ const pdfjsLib = window['pdfjsLib']; // Usamos pdfjsLib correctamente
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
 // Ruta del PDF
-const pdfUrl = './pdfs/JENNIFER-DENIS-ENERO-25.pdf';
+const pdfUrl = './pdf/202501.pdf';
 
 // Elementos del DOM
 const canvas = document.getElementById('pdf-render');

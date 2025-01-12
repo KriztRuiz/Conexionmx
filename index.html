@@ -9,13 +9,35 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Encabezado -->
-    <header class="header">
+<!-- Encabezado -->
+<header class="header">
+    <div class="container">
+        <img src="Galeria/logo.png" alt="Conexionmx" class="logo">
+        <p class="subtitulo">ACERCANDO TUS FRONTERAS</p>
+    </div>
+    <nav id="nav">
+        <button id="menu-button">≡</button>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="Revistas.html">Revistas</a></li>
+            <li><a href="Articulos.html">Articulos</a></li>
+            <li><a href="Galeria.html">Galeria</a></li>
+            <li><a href="about.html">Acerca de</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    
+</header>
+    <main>
+        <!-- Patrocinadores -->
+    <section class="patrocinadores">
         <div class="container">
-            <h1 class="titulo">Conexión<span>mx</span></h1>
-            <p class="subtitulo">ACERCANDO TUS FRONTERAS</p>
+            <h2 class="seccion-titulo">Haz clic para mas contenido:</h2>
+            <div class="carrusel">
+                <img id="patrocinador-img" src="Galeria/patrocinador1.png" alt="Patrocinador">
+            </div>
         </div>
-    </header>
+    </section>
 
     <!-- Visor de PDF -->
     <section class="visor-pdf">
@@ -27,20 +49,15 @@
                 <span id="page-num">Página 1</span> de <span id="page-count">1</span>
                 <button id="next-page" class="boton">Siguiente</button>
             </div>
-            <a href="pdfs/JENNIFER-DENIS-ENERO-25.pdf" download class="boton boton-descargar">Descargar PDF</a>
+            <a href="Revistas/JENNIFER-DENIS-ENERO-25.pdf" download class="boton boton-descargar">Descargar PDF</a>
         </div>
     </section>
 
-    <!-- Patrocinadores -->
-    <section class="patrocinadores">
-        <div class="container">
-            <h2 class="seccion-titulo">Nuestros Patrocinadores</h2>
-            <div class="carrusel">
-                <img id="patrocinador-img" src="images/patrocinador1.png" alt="Patrocinador">
-            </div>
-        </div>
+    <!--Seccion Articulos-->
+    <section class="articles-sect">
+        <h2 class="seccion-titulo">Seccion en Construccion</h2>
     </section>
-
+</main>
     <!-- Pie de página -->
     <footer class="footer">
         <div class="container">
@@ -50,5 +67,6 @@
 
     <script src="js/pdf-viewer.js"></script>
     <script src="js/patrocinadores.js"></script>
+    <script src="js/nav.js"></script>
 </body>
 </html>
