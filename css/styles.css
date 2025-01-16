@@ -237,6 +237,84 @@ canvas {
   color: #333;
 }
 
+/* About Section Styles */
+.about-section {
+  padding: 20px;
+  background-color: #f8f6f4;
+  color: #2e2e2e;
+  text-align: center;
+}
+
+.about-buttons {
+  margin-bottom: 20px;
+}
+
+.about-tab {
+  padding: 10px 15px;
+  margin: 0 5px;
+  background-color: #8C796B;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.about-tab:hover {
+  background-color: #6b4423;
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.about-item {
+  flex: 1 1 30%;
+  max-width: 30%;
+  min-width: 250px;
+  text-align: left;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Pagination Buttons */
+.pagination-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.info-tab {
+  padding: 8px 12px;
+  background-color: #8C796B;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.info-tab:hover {
+  background-color: #6b4423;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-item {
+      max-width: 100%;
+      min-width: 100%;
+  }
+}
+
 /* Pie de página */
 .footer {
   background-color: #2a3d66;
