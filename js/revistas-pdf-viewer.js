@@ -7,7 +7,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs
 // Generar la ruta del PDF dinámicamente
 const currentPath = window.location.pathname; // Ruta completa de la página
 const currentPageName = currentPath.split('/').pop().split('.').shift(); // Extraer el nombre del archivo sin extensión
-const pdfUrl = `../pdf/${currentPageName}.pdf`; // Ruta dinámica del PDF
+const pdfUrl = `https://conexionmx.s3.us-east-2.amazonaws.com/pdf/${currentPageName}.pdf`; // Ruta dinámica del PDF
 
 // Elementos del DOM
 const canvas = document.getElementById('pdf-render');
@@ -16,12 +16,14 @@ const prevButton = document.getElementById('prev-page');
 const nextButton = document.getElementById('next-page');
 const pageNumDisplay = document.getElementById('page-num');
 const pageCountDisplay = document.getElementById('page-count');
+const zoomControl = document.getElementById('zoom-control'); // Nuevo control de zoom
 
 // Variables de control
 let pdfDoc = null;
 let currentPage = 1;
 let isRendering = false;
 let pageQueue = null;
+let scale = 1.5; // Escala inicial
 
 // Renderizar una página
 const renderPage = (num) => {
@@ -29,7 +31,7 @@ const renderPage = (num) => {
 
   // Obtener la página
   pdfDoc.getPage(num).then((page) => {
-    const viewport = page.getViewport({ scale: 1.5 });
+    const viewport = page.getViewport({ scale: scale });
     canvas.height = viewport.height;
     canvas.width = viewport.width;
 
@@ -74,6 +76,12 @@ const showNextPage = () => {
   queueRenderPage(currentPage);
 };
 
+// Manejar el cambio de zoom
+const handleZoomChange = () => {
+  scale = parseFloat(zoomControl.value);
+  queueRenderPage(currentPage);
+};
+
 // Cargar el documento PDF
 pdfjsLib.getDocument(pdfUrl).promise.then((pdf) => {
   pdfDoc = pdf;
@@ -86,3 +94,4 @@ pdfjsLib.getDocument(pdfUrl).promise.then((pdf) => {
 // Eventos de los botones
 prevButton.addEventListener('click', showPrevPage);
 nextButton.addEventListener('click', showNextPage);
+zoomControl.addEventListener('input', handleZoomChange); // Evento para el control de zoom
