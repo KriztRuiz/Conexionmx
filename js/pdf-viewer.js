@@ -27,25 +27,29 @@ const renderPage = (num) => {
 
   // Obtener la página
   pdfDoc.getPage(num).then((page) => {
-    const viewport = page.getViewport({ scale: 1.5 });
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
+      const viewport = page.getViewport({ scale });
 
-    const renderContext = {
-      canvasContext: ctx,
-      viewport: viewport,
-    };
+      // Ajustar el canvas al tamaño del PDF
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
 
-    page.render(renderContext).promise.then(() => {
-      isRendering = false;
+      const renderContext = {
+          canvasContext: ctx,
+          viewport: viewport,
+      };
 
-      if (pageQueue !== null) {
-        renderPage(pageQueue);
-        pageQueue = null;
-      }
-    });
+      page.render(renderContext).promise.then(() => {
+          isRendering = false;
 
-    pageNumDisplay.textContent = num;
+          if (pageQueue !== null) {
+              renderPage(pageQueue);
+              pageQueue = null;
+          }
+      });
+
+      pageNumDisplay.textContent = num;
+  }).catch((err) => {
+      showError(`Error al renderizar la página: ${err.message}`);
   });
 };
 

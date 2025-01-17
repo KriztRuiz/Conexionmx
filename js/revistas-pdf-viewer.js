@@ -4,6 +4,8 @@ const pdfjsLib = window['pdfjsLib']; // Usamos pdfjsLib correctamente
 // Configurar el worker de PDF.js
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
 
+pdfjsLib.GlobalWorkerOptions.enableTextLayer = true;
+
 // Generar la ruta del PDF dinámicamente
 const currentPath = window.location.pathname; // Ruta completa de la página
 const currentPageName = currentPath.split('/').pop().split('.').shift(); // Extraer el nombre del archivo sin extensión
@@ -24,7 +26,7 @@ let pdfDoc = null;
 let currentPage = 1;
 let isRendering = false;
 let pageQueue = null;
-let scale = 1.5; // Escala inicial
+let scale = 2; // Escala inicial
 const minScale = 0.5;
 const maxScale = 3;
 
