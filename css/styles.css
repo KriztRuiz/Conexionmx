@@ -104,39 +104,49 @@ nav ul li a:hover {
   margin: 0 auto;
 }
 
-/* Visor de PDF */
 .visor-pdf {
   text-align: center;
-  padding: 40px 0;
+  margin-top: 20px;
 }
 
-.visor-pdf .seccion-titulo {
-  font-size: 2rem;
-  color: #2a3d66;
-  margin-bottom: 20px;
-}
-
-canvas {
-  display: block;
-  margin: 0 auto;
-  width: 100%; /* Asegura que ocupe todo el ancho disponible */
-  height: auto; /* Mantiene la proporción */
-  background-color: #ffffff;
+.visor-pdf canvas {
   border: 1px solid #ccc;
+  border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
 }
-
 
 .pdf-controls {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 10px;
   margin-top: 10px;
 }
 
 .pdf-controls span {
-  margin: 0 15px;
+  font-size: 1rem;
+  color: #333;
 }
+
+.zoom-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.zoom-controls .boton {
+  background-color: #4a90e2;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.zoom-controls .boton:hover {
+  background-color: #357ab8;
+}
+
 
 .boton {
   padding: 10px 20px;
