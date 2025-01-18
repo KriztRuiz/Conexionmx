@@ -24,6 +24,12 @@ let isRendering = false;
 let pageQueue = null;
 let scale = 1.0; // Escala inicial
 
+// Mostrar errores
+const showError = (message) => {
+    console.error(message);
+    alert(message); // Muestra una alerta con el mensaje de error
+};
+
 // Renderizar una página
 const renderPage = (num) => {
     isRendering = true;
@@ -52,7 +58,7 @@ const renderPage = (num) => {
 
         pageNumDisplay.textContent = num;
     }).catch((err) => {
-        console.error(`Error al renderizar la página: ${err.message}`);
+        showError(`Error al renderizar la página: ${err.message}`);
     });
 };
 
@@ -98,7 +104,7 @@ pdfjsLib.getDocument(pdfUrl).promise.then((pdf) => {
     pageCountDisplay.textContent = pdf.numPages;
     renderPage(currentPage);
 }).catch((err) => {
-    console.error(`Error al cargar el PDF: ${err.message}`);
+    showError(`Error al cargar el PDF: ${err.message}`);
 });
 
 // Eventos de los botones
