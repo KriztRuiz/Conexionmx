@@ -403,7 +403,7 @@ nav ul li a:hover {
     display: none;
     position: fixed;
     top: 0px;
-    left: 0px;
+    left: 50px;
     right: 0;
     background-color: var(--color-primary);
     padding: 20px;
