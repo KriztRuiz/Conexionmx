@@ -1,17 +1,40 @@
-/* General */
+/**************************************
+ * Variables de color y fuentes
+ **************************************/
+ :root {
+  --color-primary: #8C796B;        /* Color principal (header, botones) */
+  --color-secondary: #6b4423;      /* Variación más oscura del color principal */
+  --color-accent: #2a3d66;         /* Color acento para botones, links, etc. */
+  --color-bg: #f8f6f4;             /* Color de fondo principal */
+  --color-text: #2e2e2e;           /* Color de texto */
+  --color-white: #ffffff;          /* Blanco puro */
+  --color-border: #ccc;            /* Color para bordes */
+  --transition-speed: 0.3s;        /* Velocidad de transición para hover */
+  --box-shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --box-shadow-medium: 0 8px 12px rgba(0, 0, 0, 0.2);
+  --font-family: 'Arial', sans-serif;
+}
+
+/**************************************
+ * Reset básico y estilos generales
+ **************************************/
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box; /* Para facilitar el manejo de paddings y anchos */
+}
+
+html {
+  scroll-behavior: smooth; /* Animación suave al hacer scroll */
 }
 
 body {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  color: #2e2e2e;
-  background-color: #f8f6f4;
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background-color: var(--color-bg);
 }
 
+/* Encabezados y párrafos */
 h1, h2, h3, p {
   margin: 0;
 }
@@ -19,48 +42,65 @@ h1, h2, h3, p {
 a {
   text-decoration: none;
   color: inherit;
+  transition: color var(--transition-speed) ease;
 }
 
-/* Encabezado */
+a:hover {
+  color: var(--color-secondary);
+}
+
+/**************************************
+ * Encabezado
+ **************************************/
 .header {
-  background-color: #8C796B;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   text-align: center;
+  position: relative; /* Para posicionar botón menú si se requiere */
 }
 
 .logo {
-  max-width: 100%;
+  max-width: 150px;
   height: auto;
   margin-left: 32px;
 }
 
 .subtitulo {
-  margin-top: 10px;
+  margin-top: 5px;
   font-size: 1.2rem;
-  color: #fff;
+  color: var(--color-white);
 }
 
-/* Botón del menú */
+/**************************************
+ * Botón del menú (versión Mobile)
+ **************************************/
 #menu-button {
   display: none;
   position: fixed;
-  top: 10px;
-  left: 10px;
+  top: 15px;
+  left: 15px;
   font-size: 24px;
-  background-color: #8C796B;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border: none;
   border-radius: 4px;
-  padding: 10px;
+  padding: 8px 12px;
   cursor: pointer;
   z-index: 1000;
+  transition: background-color var(--transition-speed) ease;
+}
+
+#menu-button:hover {
+  background-color: var(--color-secondary);
 }
 
 #menu-button:focus {
-  outline: none;
+  outline: 2px solid var(--color-white);
 }
 
-/* Menú de navegación */
+/**************************************
+ * Menú de navegación
+ **************************************/
 nav ul {
   list-style: none;
   padding: 0;
@@ -72,50 +112,45 @@ nav ul {
 
 nav ul li a {
   text-decoration: none;
-  color: #fff;
+  color: var(--color-white);
   display: flex;
-  padding: 10px;
-  transition: color 0.3s ease;
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
 nav ul li a:hover {
   color: #e4c7b2;
-  background-color: #8c796b1e;
+  background-color: rgba(140, 121, 107, 0.12);
 }
 
-/* Responsive styles */
-@media (min-width: 600px) {
-  #menu-button {
-    display: none;
-  }
-
-  #nav ul {
-    display: inline-flex;
-    flex-direction: row;
-    justify-content: start;
-    gap: 10px;
-  }
-}
-
-/* Contenedor */
+/**************************************
+ * Contenedor general
+ **************************************/
 .container {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 5px; /* Espacio vertical */
 }
 
+/**************************************
+ * Visor PDF
+ **************************************/
 .visor-pdf {
   text-align: center;
   margin-top: 20px;
 }
 
 .visor-pdf canvas {
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow-light);
   margin-bottom: 10px;
+  max-width: 100%;
 }
 
+/* Controles PDF */
 .pdf-controls {
   display: flex;
   justify-content: center;
@@ -129,51 +164,35 @@ nav ul li a:hover {
   color: #333;
 }
 
-.zoom-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.zoom-controls .boton {
-  background-color: #4a90e2;
-  color: #fff;
-  font-size: 0.9rem;
-}
-
-.zoom-controls .boton:hover {
-  background-color: #357ab8;
-}
-
-
+/* Botones generales */
 .boton {
   padding: 10px 20px;
-  background-color: #6b4423;
-  color: #ffffff;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
+  transition: background-color var(--transition-speed) ease;
 }
 
 .boton:hover {
   background-color: #8c5831;
 }
 
+/* Botón para descargar */
 .boton-descargar {
-  display: inline-block;
   margin-top: 20px;
-  background-color: #2a3d66;
+  background-color: var(--color-accent);
 }
 
 .boton-descargar:hover {
   background-color: #3d518b;
 }
 
-/* Sección Patrocinadores */
+/**************************************
+ * Sección Patrocinadores
+ **************************************/
 .patrocinadores {
   padding: 40px 0;
   text-align: center;
@@ -181,10 +200,11 @@ nav ul li a:hover {
 
 .patrocinadores .seccion-titulo {
   font-size: 2rem;
-  color: #6b4423;
+  color: var(--color-secondary);
   margin-bottom: 20px;
 }
 
+/* Carrusel */
 .carrusel {
   position: relative;
   width: 80%;
@@ -195,22 +215,25 @@ nav ul li a:hover {
 .carrusel img {
   width: 100%;
   border-radius: 10px;
-  border: 2px solid #ccc;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--color-border);
+  box-shadow: var(--box-shadow-light);
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
   max-width: 400px;
   max-height: 600px;
 }
 
 .carrusel img:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--box-shadow-medium);
 }
 
-/* Sección Tarjetas de las Revistas */
+/**************************************
+ * Sección Tarjetas de Revistas
+ **************************************/
 .tarjetas-revistas h2 {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .tarjetas {
@@ -221,17 +244,18 @@ nav ul li a:hover {
 }
 
 .tarjeta {
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow-light);
   transition: transform 0.2s, box-shadow 0.2s;
   text-align: center;
+  background-color: var(--color-white);
 }
 
 .tarjeta:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--box-shadow-medium);
 }
 
 .tarjeta img {
@@ -249,11 +273,13 @@ nav ul li a:hover {
   color: #333;
 }
 
-/* About Section Styles */
+/**************************************
+ * Sección About
+ **************************************/
 .about-section {
   padding: 20px;
-  background-color: #f8f6f4;
-  color: #2e2e2e;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   text-align: center;
 }
 
@@ -264,15 +290,16 @@ nav ul li a:hover {
 .about-tab {
   padding: 10px 15px;
   margin: 0 5px;
-  background-color: #8C796B;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
 }
 
 .about-tab:hover {
-  background-color: #6b4423;
+  background-color: var(--color-secondary);
 }
 
 .about-content {
@@ -288,17 +315,19 @@ nav ul li a:hover {
   min-width: 250px;
   text-align: left;
   padding: 15px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  box-shadow: var(--box-shadow-light);
+  background-color: var(--color-white);
 }
 
 .hidden {
   display: none;
 }
 
-/* Pagination Buttons */
+/**************************************
+ * Paginación
+ **************************************/
 .pagination-buttons {
   margin-top: 20px;
   display: flex;
@@ -308,29 +337,24 @@ nav ul li a:hover {
 
 .info-tab {
   padding: 8px 12px;
-  background-color: #8C796B;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
 }
 
 .info-tab:hover {
-  background-color: #6b4423;
+  background-color: var(--color-secondary);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .about-item {
-      max-width: 100%;
-      min-width: 100%;
-  }
-}
-
-/* Pie de página */
+/**************************************
+ * Pie de página
+ **************************************/
 .footer {
-  background-color: #2a3d66;
-  color: #ffffff;
+  background-color: var(--color-accent);
+  color: var(--color-white);
   text-align: center;
   padding: 20px 0;
   font-size: 0.9rem;
@@ -340,68 +364,54 @@ nav ul li a:hover {
   margin: 5px 0;
 }
 
-/* Responsive styles */
+/**************************************
+ * Estilos Responsive
+ **************************************/
+/* Tablets y pantallas medianas */
+@media (max-width: 992px) {
+  .about-item {
+    max-width: 45%;
+  }
+}
+
+/* Móviles y pantallas pequeñas */
+@media (max-width: 768px) {
+  .about-item {
+    max-width: 100%;
+    min-width: 100%;
+  }
+}
+
+/* Menú responsive para pantallas pequeñas */
 @media (max-width: 600px) {
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
+  /* Mostrar el botón del menú en pantallas pequeñas */
+  #menu-button {
+    display: block;
   }
 
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  .header {
     text-align: center;
   }
 
-  .logo {
-    max-width: 100%;
-    height: auto;
-    padding: 3px;
-  }
-
   .subtitulo {
-    margin-top: 10px;
-    font-size: 1.2rem;
-    color: #fff;
+    margin-top: 5px;
+    font-size: 1.1rem;
   }
 
-  #nav {
-    position: relative;
-  }
-
-  /* Botón del menú */
-  #menu-button {
-    position: fixed;
-    top: 10px;
-    left: 0px;
-    font-size: 24px;
-    background-color: #8C796B;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 1000;
-  }
-
-  #menu-button:focus {
-    outline: none;
-  }
-
-  /* Menú desplegable */
+  /* El nav se esconde inicialmente */
   #nav ul {
     display: none;
     position: fixed;
     top: 0px;
-    left: 30px;
-    background-color: #8C796B;
-    padding: 10px;
-    width: 100%;
+    left: 0px;
+    right: 0;
+    background-color: var(--color-primary);
+    padding: 20px;
     border-radius: 4px;
     list-style: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow-light);
+    flex-direction: column;
+    gap: 15px;
     z-index: 999;
   }
 
@@ -410,22 +420,54 @@ nav ul li a:hover {
   }
 
   #nav ul li a {
-    text-decoration: none;
-    color: white;
+    color: var(--color-white);
     font-size: 18px;
+    padding: 10px;
+    border-radius: 4px;
   }
 
   #nav ul li a:hover {
-    color: #FFD700;
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
+  /* Clases para mostrar/ocultar en móvil */
   .hidden {
     display: none;
   }
 
   .visible {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
   }
+}
+
+/**************************************
+ * Spinner y Barra de progreso (Nuevos)
+ **************************************/
+
+/* Spinner */
+#spinner {
+  display: none;           /* Oculto por defecto */
+  width: 60px;
+  height: 60px;
+  margin: 10px auto;       /* Centrado horizontal */
+}
+
+/* Contenedor de la barra de progreso */
+#progress-container {
+  display: none;           /* Oculto por defecto */
+  width: 100%;
+  max-width: 400px;
+  height: 10px;
+  background-color: #ddd;  /* Color de fondo del contenedor */
+  margin: 10px auto;       /* Centrado horizontal */
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Barra de progreso en sí */
+#progress-bar {
+  width: 0%;               /* Por defecto, empieza en 0% */
+  height: 100%;
+  background-color: var(--color-accent);
+  transition: width 0.3s ease-in-out; /* Animación suave al cambiar el ancho */
 }

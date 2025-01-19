@@ -1,5 +1,5 @@
 // Configuración de PDF.js
-const pdfjsLib = window['pdfjsLib']; // Usamos pdfjsLib correctamente
+const pdfjsLib = window['pdfjsLib']; // Referencia a PDF.js
 
 // Configurar el worker de PDF.js
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
@@ -14,8 +14,11 @@ const prevButton = document.getElementById('prev-page');
 const nextButton = document.getElementById('next-page');
 const pageNumDisplay = document.getElementById('page-num');
 const pageCountDisplay = document.getElementById('page-count');
-const zoomInButton = document.getElementById('zoom-in');
-const zoomOutButton = document.getElementById('zoom-out');
+
+// Spinner y barra de progreso
+const spinner = document.getElementById('spinner');
+const progressContainer = document.getElementById('progress-container');
+const progressBar = document.getElementById('progress-bar');
 
 // Variables de control
 let pdfDoc = null;
@@ -24,91 +27,139 @@ let isRendering = false;
 let pageQueue = null;
 let scale = 1.0; // Escala inicial
 
-// Mostrar errores
+// Función para mostrar un mensaje de error
 const showError = (message) => {
-    console.error(message);
-    alert(message); // Muestra una alerta con el mensaje de error
+  console.error(message);
+  alert(message);
 };
+
+// Mostrar/Ocultar spinner
+function showSpinner() {
+  spinner.style.display = 'block';
+}
+
+function hideSpinner() {
+  spinner.style.display = 'none';
+}
+
+// Mostrar/Ocultar barra de progreso
+function showProgressBar() {
+  progressContainer.style.display = 'block';
+  progressBar.style.width = '0%'; // Reinicia el progreso
+}
+
+function hideProgressBar() {
+  progressContainer.style.display = 'none';
+}
+
+// Actualizar la barra de progreso con un valor entre 0 y 100
+function updateProgressBar(percentage) {
+  progressBar.style.width = `${percentage}%`;
+}
 
 // Renderizar una página
 const renderPage = (num) => {
-    isRendering = true;
+  isRendering = true;
+  showSpinner(); // Mostrar el spinner mientras se renderiza
 
-    // Obtener la página
-    pdfDoc.getPage(num).then((page) => {
-        const viewport = page.getViewport({ scale });
+  // Obtener la página
+  pdfDoc.getPage(num).then((page) => {
+    const viewport = page.getViewport({ scale });
 
-        // Ajustar el canvas al tamaño del PDF
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
+    // Ajustar el canvas al tamaño del PDF
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
 
-        const renderContext = {
-            canvasContext: ctx,
-            viewport: viewport,
-        };
+    const renderContext = {
+      canvasContext: ctx,
+      viewport: viewport,
+    };
 
-        page.render(renderContext).promise.then(() => {
-            isRendering = false;
+    // Renderizar
+    return page.render(renderContext).promise;
+  })
+  .then(() => {
+    // Se terminó de renderizar la página
+    hideSpinner();
+    isRendering = false;
 
-            if (pageQueue !== null) {
-                renderPage(pageQueue);
-                pageQueue = null;
-            }
-        });
+    // Si hay alguna página en la cola, renderizarla
+    if (pageQueue !== null) {
+      renderPage(pageQueue);
+      pageQueue = null;
+    }
+  })
+  .catch((err) => {
+    showError(`Error al renderizar la página: ${err.message}`);
+    hideSpinner();
+  });
 
-        pageNumDisplay.textContent = num;
-    }).catch((err) => {
-        showError(`Error al renderizar la página: ${err.message}`);
-    });
+  // Mostrar el número de página actual en el DOM
+  pageNumDisplay.textContent = num;
 };
 
 // Manejar la cola de renderizado
 const queueRenderPage = (num) => {
-    if (isRendering) {
-        pageQueue = num;
-    } else {
-        renderPage(num);
-    }
+  if (isRendering) {
+    pageQueue = num;
+  } else {
+    renderPage(num);
+  }
 };
 
-// Mostrar la página anterior
+// Mostrar página anterior
 const showPrevPage = () => {
-    if (currentPage <= 1) return;
-    currentPage--;
-    queueRenderPage(currentPage);
+  if (currentPage <= 1) return;
+  currentPage--;
+  queueRenderPage(currentPage);
 };
 
-// Mostrar la siguiente página
+// Mostrar página siguiente
 const showNextPage = () => {
-    if (currentPage >= pdfDoc.numPages) return;
-    currentPage++;
-    queueRenderPage(currentPage);
+  if (currentPage >= pdfDoc.numPages) return;
+  currentPage++;
+  queueRenderPage(currentPage);
 };
 
-// Ajustar el zoom
-const zoomIn = () => {
-    scale += 0.1;
-    queueRenderPage(currentPage);
-};
+// Cargar el documento PDF con configuración de streaming
+function loadPdf() {
+  // Muestra la barra de progreso de descarga
+  showProgressBar();
 
-const zoomOut = () => {
-    if (scale > 0.5) {
-        scale -= 0.1;
-        queueRenderPage(currentPage);
+  // Configurar carga progresiva (streaming / range requests)
+  const loadingTask = pdfjsLib.getDocument({
+    url: pdfUrl,
+    // Habilita peticiones Range para descarga progresiva
+    rangeChunkSize: 65536 // 64 KB (puedes ajustar el tamaño)
+  });
+
+  // Control del evento de progreso
+  loadingTask.onProgress = (progressData) => {
+    if (progressData.total) {
+      const percentage = (progressData.loaded / progressData.total) * 100;
+      updateProgressBar(percentage.toFixed(2));
+    } else {
+      // Cuando no se conoce el total, igual podemos mostrar la parte cargada
+      updateProgressBar(50); // valor estimado, por ejemplo
     }
-};
+  };
 
-// Cargar el documento PDF
-pdfjsLib.getDocument(pdfUrl).promise.then((pdf) => {
+  // Cuando se completa la carga del documento
+  loadingTask.promise.then((pdf) => {
     pdfDoc = pdf;
     pageCountDisplay.textContent = pdf.numPages;
-    renderPage(currentPage);
-}).catch((err) => {
+    hideProgressBar(); // Ocultamos la barra de progreso
+    renderPage(currentPage); // Renderizar la primera página
+  })
+  .catch((err) => {
     showError(`Error al cargar el PDF: ${err.message}`);
-});
+    hideProgressBar();
+  });
+}
 
 // Eventos de los botones
 prevButton.addEventListener('click', showPrevPage);
 nextButton.addEventListener('click', showNextPage);
-zoomInButton.addEventListener('click', zoomIn);
-zoomOutButton.addEventListener('click', zoomOut);
+
+// Iniciar la carga
+loadPdf();
