@@ -77,7 +77,7 @@ a:hover {
 #menu-button {
   display: none;
   position: fixed;
-  top: 15px;
+  top: 10px;
   left: 15px;
   font-size: 24px;
   background-color: var(--color-primary);
@@ -303,6 +303,7 @@ nav ul li a:hover {
 }
 
 .about-content {
+  margin: 10px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -371,6 +372,14 @@ nav ul li a:hover {
 @media (max-width: 992px) {
   .about-item {
     max-width: 45%;
+  }
+
+  #img-about {
+    padding: 15px;
+    width: -webkit-fill-available;
+  }
+  .info-section {
+    padding: 15px;
   }
 }
 
@@ -474,4 +483,50 @@ nav ul li a:hover {
   height: 100%;
   background-color: var(--color-accent);
   transition: width 0.3s ease-in-out; /* Animación suave al cambiar el ancho */
+}
+
+@media (min-width: 1024px) {
+
+  /* El main sigue en flex */
+  main {
+    display: flex;
+    align-items: flex-start; 
+  }
+
+  .patrocinadores {
+    flex: 0 0 300px;  /* Ancho fijo de 300px */
+    margin-right: 20px;
+
+    /* Posición sticky */
+    position: sticky;
+    top: 0;    /* Se pega al tope superior de la ventana */
+    height: fit-content; 
+    /* o ponle height:auto, pero la sección se quedará "clavada" 
+       cuando hayas hecho scroll suficiente. */
+  }
+
+  .about-section {
+    flex: 1; 
+    text-align: left;
+    padding: 20px;
+  }
+
+  #img-about {
+    display: block;
+    max-width: 100%; /* o 90%, según prefieras dejar un margen */
+    height: auto;    /* Para mantener la proporción de la imagen */
+    margin: 0 auto;  /* Para centrarla en caso de que sea más pequeña que el contenedor */
+  }
+
+  /* Ocultamos los tabs (botones) en desktop */
+  .about-buttons,
+  .pagination-buttons {
+    display: none;
+  }
+
+  /* Mostramos todas las secciones (si tu JS las ocultaba) */
+  .about-item,
+  .info-section {
+    display: block !important;
+  }
 }

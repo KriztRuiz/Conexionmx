@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+<!-- Encabezado -->
 <header class="header">
     <div class="container">
         <img src="Galeria/logo.png" alt="Conexionmx" class="logo">
+        <p class="subtitulo">ACERCANDO TUS FRONTERAS</p>
     </div>
     <nav id="nav">
         <button id="menu-button">≡</button>
@@ -23,11 +25,21 @@
         </ul>
     </nav>
 </header>
-
+<!-- Main -->
 <main>
+<!-- Patrocinadores -->
+<section class="patrocinadores">
+    <div class="container">
+        <h2 class="seccion-titulo">Haz clic para mas contenido:</h2>
+        <div class="carrusel">
+            <img id="patrocinador-img" src="Galeria/patrocinador1.png" alt="Patrocinador">
+        </div>
+    </div>
+</section>
+    <!-- Seccion Acerca de -->
     <section class="about-section">
         <h2 class="section-title">Acerca de Nosotros</h2>
-
+        <img id="img-about" src="Galeria/img-about.jpg" alt="Imagen de los Tickys">
         <div class="about-buttons" id="about-buttons">
             <button class="about-tab" data-target="origin">El Origen</button>
             <button class="about-tab" data-target="vision">La Visión</button>
@@ -74,5 +86,7 @@
     </div>
 </footer>
 <script src="js/about.js"></script>
+<script src="js/patrocinadores.js"></script>
+<script src="js/nav.js"></script>
 </body>
 </html>
