@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revista Digital</title>
+    <title>Revista Digital - Agosto 2024</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
@@ -18,16 +17,17 @@
     <nav id="nav">
         <button id="menu-button">≡</button>
         <ul>
-            <li><a href="../index.html">Inicio</a></li>
-            <li><a href="../Revistas.html">Revistas</a></li>
-            <li><a href="../Galeria.html">Galeria</a></li>
-            <li><a href="../about.html">Acerca de</a></li>
-            <li><a href="../Contacto.html">Contacto</a></li>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="Revistas.html">Revistas</a></li>
+            <li><a href="Articulos.html">Articulos</a></li>
+            <li><a href="Galeria.html">Galeria</a></li>
+            <li><a href="about.html">Acerca de</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
         </ul>
     </nav>
 </header>
-    <main>
-        <!-- Patrocinadores -->
+<main>
+    <!-- Patrocinadores -->
     <section class="patrocinadores">
         <div class="container">
             <h2 class="seccion-titulo">Haz clic para mas contenido:</h2>
@@ -40,26 +40,34 @@
     <!-- Visor de PDF -->
     <section class="visor-pdf">
         <div class="container">
-            <h2 class="seccion-titulo">Visor de Revista</h2>
+            <h2 class="seccion-titulo">Visor de Revista Agosto 2024</h2>
             <canvas id="pdf-render"></canvas>
             <div class="pdf-controls">
                 <button id="prev-page" class="boton">Anterior</button>
                 <span id="page-num">Página 1</span> de <span id="page-count">1</span>
                 <button id="next-page" class="boton">Siguiente</button>
             </div>
-            <a href="https://conexionmx.s3.us-east-2.amazonaws.com/pdf/202408.pdf" download class="boton boton-descargar">Descargar PDF</a>
+            
+            <!-- Ajusta el link de descarga para que apunte al PDF correcto -->
+            <a 
+              href="https://conexionmx.s3.us-east-2.amazonaws.com/pdf/202408.pdf" 
+              download 
+              class="boton boton-descargar"
+            >
+              Descargar PDF
+            </a>
         </div>
     </section>
 </main>
-    <!-- Pie de página -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Revista Conexión. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+<!-- Pie de página -->
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2025 Revista Conexión. Todos los derechos reservados.</p>
+    </div>
+</footer>
 
-    <script src="../js/revistas-pdf-viewer.js"></script>
-    <script src="../js/revistas-patrocinadores.js"></script>
-    <script src="../js/nav.js"></script>
+<script src="../js/revistas-pdf-viewer.js"></script>
+<script src="../js/revistas-patrocinadores.js"></script>
+<script src="../js/nav.js"></script>
 </body>
 </html>
